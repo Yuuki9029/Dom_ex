@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+    background: black;
+}
+
+.clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #17D4FE;
+    font-size: 60px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+}
+    </style>
+    <title>Clock</title>
+</head>
+<body>
+    <div id="MyClockDisplay" class="clock" onload="show_time()">
+        
+    </div>
+    <script>
+        function show_time(){
+            let date = new Date();
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+            let section = 'AM';
+
+            if (h == 0){
+                h = 12;
+            }
+
+            if (h > 12){
+                h = h - 12;
+                section = 'PM';
+            }
+
+            h = (h < 10) ? '0' + h : h;
+            m = (m < 10) ? '0' + m : m;
+            s = (s < 10) ? '0' + s : s;
+
+            let time = h + ':' + m + ':' + s + ' ' + section;
+
+            document.getElementById('MyClockDisplay').innerText = time;
+
+            document.getElementById('MyClockDisplay').textContent = time;
+
+            setTimeout(show_time, 1000);
+        }
+
+        show_time();
+    </script>
+</body>
+</html>
