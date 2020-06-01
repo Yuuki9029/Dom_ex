@@ -10,21 +10,21 @@
             this.taskInput = document.getElementById('input-task');
             this.addBtn = document.getElementById('add-task-btn');
             this.tasklist = document.getElementById('tasks');
-            this.tasklistChilden = this.tasklist.tasklistChilden;
+            this.tasklistChildren = this.tasklist.children;
             this.errorMessage = document.getElementById('error');
         },
-        bindEvents: function(){
-            this.addBtn.onclick = this.addtask.bind(this);
+        bindEvents: function(){ 
+            this.addBtn.onclick = this.addTask.bind(this);
             this.taskInput.onkeypress = this.enterKey.bind(this);
         },
         evalTasklist: function(){
             let i, chkbox, delbtn;
 
-            for(let i =0; i < this.tasklistChilden.length; i+=1){
-                chkbox = this.tasklistChilden[i].getElementByTagName('input')[0];
-                chkbox.onclick = this.completeTask.bind(this, this.tasklistChilden[i], chkbox);
+            for(i = 0; i < this.tasklistChildren.length; i += 1){
+                chkbox = this.tasklistChildren[i].getElementsByTagName('input')[0];
+                chkbox.onclick = this.completeTask.bind(this, this.tasklistChildren[i], chkbox);
 
-                delbtn = this.tasklistChilden[i].getElementByTagName('button')[0];
+                delbtn = this.tasklistChildren[i].getElementsByTagName('button')[0];
                 delbtn.onclick = this.delTask.bind(this, i);
             }
         },
@@ -32,7 +32,7 @@
             let taskli, taskcheck, taskvalidate, taskbtn, tasktrash;
 
             taskli = document.createElement('li');
-            taskli.setAttribute('class', 'tasks');
+            taskli.setAttribute('class', 'task');
 
             taskcheck = document.createElement('input');
             taskcheck.setAttribute('type', 'checkbox');
@@ -67,11 +67,11 @@
 
         enterKey: function(event){
             if (event.keyCode === 13 || event.which === 13) {
-                this.addtask();
+                this.addTask();
             }
         },
 
-        addtask: function(){
+        addTask: function(){
             let value = this.taskInput.value;
             this.errorMessage.style.display = 'none';
             
@@ -86,7 +86,7 @@
         },
 
         delTask: function(i){
-            this.tasklist.children[i].remove;
+            this.tasklist.children[i].remove();
             this.evalTasklist();
         },
 
